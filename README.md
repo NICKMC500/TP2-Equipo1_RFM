@@ -71,3 +71,34 @@ TP2-Equipo1_RFM/
 │   └── heatmap_rfm_monto.png  # Mapa de calor exportado a 150 dpi
 ├── pipeline/                  # [Pendiente] Script ETL de la Activ
 ```
+## 🧪 Cómo probar lo que ya está desarrollado
+
+1. Abran VSCodium / VS Code y seleccionen el Kernel de Python correspondiente a `venv_tp2`.
+2. Abran el archivo **notebooks/analisis.ipynb**.
+3. Ejecuten **Run All** (`▶▶`).
+4. Verifiquen que:
+  * La tabla de reconciliación valide las 16 tablas de la base.
+  * Se calculen los quintiles de los 599 clientes.
+  * Se genere la imagen en `graficos/heatmap_rfm_monto.png`.
+
+---
+
+## 📋 Tareas Pendientes para el Grupo
+
+1. **Desarrollo del Pipeline ETL (Actividad 4):** Crear el script autónomo `pipeline/pipeline_tp2.py` para automatizar la creación y actualización de la tabla `TP2_SegmentacionRFM` en SQL Server.
+2. **Redacción del Informe Final (Actividad 5):** Estructurar las conclusiones de la segmentación RFM y armar el documento PDF y el anexo de IA.
+
+```
+
+---
+
+### 💡 Instrucciones para agregarlo a tu proyecto:
+
+1. En la raíz de tu proyecto en VSCodium, crea un nuevo archivo llamado **`README.md`**.
+2. Pega el bloque de arriba y guardalo (`Ctrl + S`).
+3. Subilo a GitHub ejecutando en la terminal:
+   ```bash
+   git add README.md
+   git commit -m "Docs: agregar README.md con instrucciones del equipo"
+   git push
+```
