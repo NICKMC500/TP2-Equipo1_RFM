@@ -1,17 +1,51 @@
-
-SELECT 'actor' AS tabla_canonica, 'actor' AS tabla_espanol, COUNT(*) AS filas_sql_server FROM dbo.actor UNION ALL 
-SELECT 'rental', 'alquiler', COUNT(*) FROM dbo.alquiler UNION ALL 
-SELECT 'category', 'categoria', COUNT(*) FROM dbo.categoria UNION ALL 
-SELECT 'city', 'ciudad', COUNT(*) FROM dbo.ciudad UNION ALL 
-SELECT 'customer', 'cliente', COUNT(*) FROM dbo.cliente UNION ALL 
-SELECT 'address', 'direccion', COUNT(*) FROM dbo.direccion UNION ALL 
-SELECT 'language', 'idioma', COUNT(*) FROM dbo.idioma UNION ALL 
-SELECT 'inventory', 'inventario', COUNT(*) FROM dbo.inventario UNION ALL 
-SELECT 'payment', 'pago', COUNT(*) FROM dbo.pago UNION ALL 
-SELECT 'country', 'pais', COUNT(*) FROM dbo.pais UNION ALL 
-SELECT 'film', 'pelicula', COUNT(*) FROM dbo.pelicula UNION ALL 
-SELECT 'film_actor', 'pelicula_actor', COUNT(*) FROM dbo.pelicula_actor UNION ALL 
-SELECT 'film_category', 'pelicula_categoria', COUNT(*) FROM dbo.pelicula_categoria UNION ALL 
-SELECT 'film_text', 'pelicula_texto', COUNT(*) FROM dbo.pelicula_texto UNION ALL 
-SELECT 'staff', 'personal', COUNT(*) FROM dbo.personal UNION ALL 
-SELECT 'store', 'tienda', COUNT(*) FROM dbo.tienda;
+/*
+Reconciliación contra el volcado estándar de Sakila.
+Los nombres físicos se resuelven desde esquema.py al cargar esta plantilla.
+La difference de payment se documenta en el diagnóstico del notebook.
+*/
+WITH Origen AS (
+    SELECT * FROM (VALUES
+        ('actor',          200),
+        ('address',        603),
+        ('category',        16),
+        ('city',          600),
+        ('country',       109),
+        ('customer',      599),
+        ('film',         1000),
+        ('film_actor',   5462),
+        ('film_category',1000),
+        ('film_text',    1000),
+        ('inventory',    4581),
+        ('language',        6),
+        ('payment',     16049),
+        ('rental',      16044),
+        ('staff',          2),
+        ('store',          2)
+    ) AS o(canonical_table, source_mysql_rows)
+), SqlServer AS (
+    SELECT 'actor' AS canonical_table, COUNT(*) AS sql_server_rows FROM {{actor}} UNION ALL
+    SELECT 'address', COUNT(*) FROM {{address}} UNION ALL
+    SELECT 'category', COUNT(*) FROM {{category}} UNION ALL
+    SELECT 'city', COUNT(*) FROM {{city}} UNION ALL
+    SELECT 'country', COUNT(*) FROM {{country}} UNION ALL
+    SELECT 'customer', COUNT(*) FROM {{customer}} UNION ALL
+    SELECT 'film', COUNT(*) FROM {{film}} UNION ALL
+    SELECT 'film_actor', COUNT(*) FROM {{film_actor}} UNION ALL
+    SELECT 'film_category', COUNT(*) FROM {{film_category}} UNION ALL
+    SELECT 'film_text', COUNT(*) FROM {{film_text}} UNION ALL
+    SELECT 'inventory', COUNT(*) FROM {{inventory}} UNION ALL
+    SELECT 'language', COUNT(*) FROM {{language}} UNION ALL
+    SELECT 'payment', COUNT(*) FROM {{payment}} UNION ALL
+    SELECT 'rental', COUNT(*) FROM {{rental}} UNION ALL
+    SELECT 'staff', COUNT(*) FROM {{staff}} UNION ALL
+    SELECT 'store', COUNT(*) FROM {{store}}
+)
+SELECT
+    o.canonical_table,
+    o.source_mysql_rows,
+    s.sql_server_rows,
+    s.sql_server_rows - o.source_mysql_rows AS difference
+FROM Origen AS o
+INNER JOIN SqlServer AS s
+    ON s.canonical_table = o.canonical_table
+ORDER BY o.canonical_table;

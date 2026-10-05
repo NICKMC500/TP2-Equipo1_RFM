@@ -1,14 +1,18 @@
+import os
 import urllib.parse
 from sqlalchemy import create_engine
 
-#Configuracion de servidor segun tus datos de SSMS
-SERVIDOR = r".\SQLEXPRESS"
-BASE_DATOS = "sakila"
+# Configuración local. Cada integrante puede sobreescribir estos valores sin
+# modificar el código mediante SQL_SERVER, SQL_DATABASE y SQL_ODBC_DRIVER.
+# No se guardan credenciales: se usa la autenticación integrada de Windows.
+SERVIDOR = os.getenv("SQL_SERVER", r".\SQLEXPRESS")
+BASE_DATOS = os.getenv("SQL_DATABASE", "sakila")
+CONTROLADOR = os.getenv("SQL_ODBC_DRIVER", "ODBC Driver 18 for SQL Server")
 
 
 #Construccion segura de la cadena de conexion codificada
-connection_string   = (
-    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+connection_string = (
+    f"DRIVER={{{CONTROLADOR}}};"
     f"SERVER={SERVIDOR};"
     f"DATABASE={BASE_DATOS};"
     f"Trusted_Connection=yes;"
@@ -16,13 +20,13 @@ connection_string   = (
     f"TrustedServerCertificate=yes;"
 )
 
-params=urllib.parse.quote_plus(connection_string)
+params = urllib.parse.quote_plus(connection_string)
 # Cadena de conexión usando Autenticación Integrada de Windows
 DATABASE_URL = f"mssql+pyodbc:///?odbc_connect={params}"
 
 
 # Crear el motor de SQLAlchemy
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
 
 def probar_conexion():
@@ -32,8 +36,8 @@ def probar_conexion():
             print("¡Conexión a SQL Server exitosa!")
             return True
 
-    except Exception as e:
-        print(f"Error de conexión: {e}")
+    except Exception as error:
+        print(f"Error de conexión: {error}")
         return False
 
 

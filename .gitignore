@@ -1,0 +1,13 @@
+#Entornos virtuales
+venv/
+venv_tp2/
+env/
+
+# Cache de Python y Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Archivos de configuracion con credenciales sensibles
+*.env
+.vscode/

@@ -1,14 +1,28 @@
-WITH FechaMax AS(
-	SELECT MAX(fecha_alquiler) AS max_fecha FROM dbo.alquiler
-)
+/*
+Conjunto de trabajo RFM.
 
-SELECT 
-	c.id_cliente,
-	CONCAT(c.nombre,' ',c.apellido) AS nombre_completo,
-	DATEDIFF(day, MAX(a.fecha_alquiler), (SELECT max_fecha FROM FechaMax)) AS recencia_dias,
-	COUNT(DISTINCT a.id_alquiler) AS frecuencia_alquileres,
-	ISNULL(SUM(p.monto), 0) AS monto_total
-FROM dbo.cliente c
-LEFT JOIN dbo.alquiler a ON c.id_cliente = a.id_cliente
-LEFT JOIN dbo.pago p ON a.id_alquiler = p.id_alquiler
-GROUP BY c.id_cliente ,c.nombre,c.apellido;
+Los identificadores se escriben como tokens canónicos y se resuelven desde
+esquema.py. Recencia se mide contra la fecha máxima registrada en la base,
+nunca contra GETDATE(), para que el resultado sea reproducible.
+*/
+WITH FechaMax AS (
+    SELECT MAX({{rental.rental_date}}) AS max_fecha
+    FROM {{rental}}
+)
+SELECT
+    c.{{customer.customer_id}} AS customer_id,
+    CONCAT(c.{{customer.first_name}}, ' ', c.{{customer.last_name}}) AS customer_name,
+    DATEDIFF(day, MAX(a.{{rental.rental_date}}), fm.max_fecha) AS recency_days,
+    COUNT(DISTINCT a.{{rental.rental_id}}) AS rental_frequency,
+    COALESCE(SUM(p.{{payment.amount}}), 0) AS monetary_amount
+FROM {{customer}} AS c
+LEFT JOIN {{rental}} AS a
+    ON a.{{rental.customer_id}} = c.{{customer.customer_id}}
+LEFT JOIN {{payment}} AS p
+    ON p.{{payment.rental_id}} = a.{{rental.rental_id}}
+CROSS JOIN FechaMax AS fm
+GROUP BY
+    c.{{customer.customer_id}},
+    c.{{customer.first_name}},
+    c.{{customer.last_name}},
+    fm.max_fecha;
