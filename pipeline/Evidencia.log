@@ -1,0 +1,53 @@
+PS C:\Users\Brian\Desktop\TP2_SEMINARIO\TP2-Equipo1_RFM> & c:/Users/Brian/Desktop/TP2_SEMINARIO/TP2-Equipo1_RFM/venv_tp2/Scripts/Activate.ps1
+(venv_tp2) PS C:\Users\Brian\Desktop\TP2_SEMINARIO\TP2-Equipo1_RFM> & c:/Users/Brian/Desktop/TP2_SEMINARIO/TP2-Equipo1_RFM/venv_tp2/Scripts/python.exe c:/Users/Brian/Desktop/TP2_SEMINARIO/TP2-Equipo1_RFM/pipeline/pipeline.py
+2026-10-08 23:54:01,805 | INFO | ====================================================================
+2026-10-08 23:54:01,806 | INFO | INICIO DEL PIPELINE ETL: 2026-10-08 23:54:01
+2026-10-08 23:54:01,806 | INFO | ETAPA 1/3 - EXTRACCIÓN: comienza.
+2026-10-08 23:54:01,807 | INFO | Conectando a SQL Server: servidor=FAMILIAAMORPC, base=sakila, driver=ODBC Driver 18 for SQL Server
+2026-10-08 23:54:02,003 | INFO | Ejecutando consulta de clientes, alquileres y pagos...
+2026-10-08 23:54:02,053 | INFO | SQL Server devolvió 599 filas.
+2026-10-08 23:54:02,056 | INFO | Conexión de extracción cerrada.
+2026-10-08 23:54:02,056 | INFO | Leyendo CSV ficticio: perfil_comercial_clientes.csv
+2026-10-08 23:54:02,063 | INFO | CSV leído: 30 filas.
+2026-10-08 23:54:02,063 | INFO | ETAPA 2/3 - TRANSFORMACIÓN: comienza.
+2026-10-08 23:54:02,067 | INFO | Uniendo DataFrame SQL con CSV mediante merge por id_cliente (left join).
+2026-10-08 23:54:02,081 | INFO | Merge completado: 30 coincidencias y 569 clientes sin perfil CSV.
+2026-10-08 23:54:02,084 | INFO | Calculando quintiles RFM...
+2026-10-08 23:54:02,106 | INFO | Transformación terminada: 599 filas; 94 segmentos distintos.
+2026-10-08 23:54:02,106 | INFO | ETAPA 3/3 - CARGA: se cargarán 599 filas.
+2026-10-08 23:54:02,113 | INFO | Verificando/creando la tabla destino...
+2026-10-08 23:54:02,139 | INFO | Eliminando filas anteriores dentro de la transacción...
+2026-10-08 23:54:02,140 | INFO | Insertando nuevo snapshot en SQL Server...
+2026-10-08 23:54:02,227 | INFO | Insert ejecutado; confirmando transacción.
+2026-10-08 23:54:02,228 | INFO | COMMIT confirmado. Filas cargadas: 599.
+2026-10-08 23:54:02,229 | INFO | Conexión de carga cerrada.
+2026-10-08 23:54:02,229 | INFO | Conectando a SQL Server: servidor=FAMILIAAMORPC, base=sakila, driver=ODBC Driver 18 for SQL Server
+2026-10-08 23:54:02,234 | INFO | VERIFICACIÓN: destino tiene 599 filas; DataFrame tenía 599.
+2026-10-08 23:54:02,235 | INFO | PIPELINE FINALIZADO CORRECTAMENTE. Duración: 0:00:00.429419
+(venv_tp2) PS C:\Users\Brian\Desktop\TP2_SEMINARIO\TP2-Equipo1_RFM> & c:/Users/Brian/Desktop/TP2_SEMINARIO/TP2-Equipo1_RFM/venv_tp2/Scripts/python.exe c:/Users/Brian/Desktop/TP2_SEMINARIO/TP2-Equipo1_RFM/pipeline/pipeline.py
+2026-10-08 23:55:19,806 | INFO | ====================================================================
+2026-10-08 23:55:19,807 | INFO | INICIO DEL PIPELINE ETL: 2026-10-08 23:55:19
+2026-10-08 23:55:19,808 | INFO | ETAPA 1/3 - EXTRACCIÓN: comienza.
+2026-10-08 23:55:19,809 | INFO | Conectando a SQL Server: servidor=FAMILIAAMORPC, base=sakila, driver=ODBC Driver 18 for SQL Server
+2026-10-08 23:55:20,028 | INFO | Ejecutando consulta de clientes, alquileres y pagos...
+2026-10-08 23:55:20,066 | INFO | SQL Server devolvió 599 filas.
+2026-10-08 23:55:20,067 | INFO | Conexión de extracción cerrada.
+2026-10-08 23:55:20,067 | INFO | Leyendo CSV ficticio: perfil_comercial_clientes.csv
+2026-10-08 23:55:20,071 | INFO | CSV leído: 30 filas.
+2026-10-08 23:55:20,071 | INFO | ETAPA 2/3 - TRANSFORMACIÓN: comienza.
+2026-10-08 23:55:20,075 | INFO | Uniendo DataFrame SQL con CSV mediante merge por id_cliente (left join).
+2026-10-08 23:55:20,085 | INFO | Merge completado: 30 coincidencias y 569 clientes sin perfil CSV.
+2026-10-08 23:55:20,088 | INFO | Calculando quintiles RFM...
+2026-10-08 23:55:20,101 | INFO | Transformación terminada: 599 filas; 94 segmentos distintos.
+2026-10-08 23:55:20,101 | INFO | ETAPA 3/3 - CARGA: se cargarán 599 filas.
+2026-10-08 23:55:20,102 | INFO | Conectando a SQL Server: servidor=FAMILIAAMORPC, base=sakila, driver=ODBC Driver 18 for SQL Server
+2026-10-08 23:55:20,105 | INFO | Verificando/creando la tabla destino...
+2026-10-08 23:55:20,107 | INFO | Eliminando filas anteriores dentro de la transacción...
+2026-10-08 23:55:20,110 | INFO | Insertando nuevo snapshot en SQL Server...
+2026-10-08 23:55:20,172 | INFO | Insert ejecutado; confirmando transacción.
+2026-10-08 23:55:20,173 | INFO | COMMIT confirmado. Filas cargadas: 599.
+2026-10-08 23:55:20,173 | INFO | Conexión de carga cerrada.
+2026-10-08 23:55:20,174 | INFO | Conectando a SQL Server: servidor=FAMILIAAMORPC, base=sakila, driver=ODBC Driver 18 for SQL Server
+2026-10-08 23:55:20,230 | INFO | VERIFICACIÓN: destino tiene 599 filas; DataFrame tenía 599.
+2026-10-08 23:55:20,231 | INFO | PIPELINE FINALIZADO CORRECTAMENTE. Duración: 0:00:00.424401
+(venv_tp2) PS C:\Users\Brian\Desktop\TP2_SEMINARIO\TP2-Equipo1_RFM> 

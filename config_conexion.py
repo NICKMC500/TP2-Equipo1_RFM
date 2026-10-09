@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 # modificar el código mediante SQL_SERVER, SQL_DATABASE y SQL_ODBC_DRIVER.
 # No se guardan credenciales: se usa la autenticación integrada de Windows.
 SERVIDOR = os.getenv("SQL_SERVER", r".\SQLEXPRESS")
+#SERVIDOR = os.getenv("SQL_SERVER", "FAMILIAAMORPC")
 BASE_DATOS = os.getenv("SQL_DATABASE", "sakila")
 CONTROLADOR = os.getenv("SQL_ODBC_DRIVER", "ODBC Driver 18 for SQL Server")
 

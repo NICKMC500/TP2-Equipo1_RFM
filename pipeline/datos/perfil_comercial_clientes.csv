@@ -1,0 +1,31 @@
+﻿id_cliente,perfil_comercial,canal_preferido,descuento_sugerido_pct
+1,Alto valor,Email,7.5
+2,Ocasional,SMS,10
+3,Frecuente,SMS,5
+4,Ocasional,Telefono,5
+5,Nuevo,Telefono,0
+6,En recuperacion,App,10
+7,Ocasional,App,10
+8,Frecuente,SMS,3
+9,Nuevo,App,10
+10,En recuperacion,Telefono,15
+11,En recuperacion,Email,10
+12,Alto valor,Email,7.5
+13,Frecuente,App,7.5
+14,Nuevo,Email,5
+15,Ocasional,App,5
+16,Frecuente,Email,7.5
+17,Alto valor,SMS,7.5
+18,Ocasional,Email,10
+19,Frecuente,SMS,3
+20,Frecuente,Telefono,3
+21,Frecuente,Email,5
+22,Frecuente,Email,5
+23,Ocasional,SMS,12.5
+24,Alto valor,Telefono,10
+25,Frecuente,App,5
+26,Alto valor,Email,10
+27,Alto valor,Email,5
+28,Ocasional,Telefono,10
+29,Alto valor,SMS,5
+30,Ocasional,Email,10
