@@ -2,8 +2,7 @@
 
 ## Alcance
 
-Esta revisión toma como punto de partida la migración de Sakila realizada en el TP1. Se revisaron y reforzaron las Actividades 0 a 3 del análisis RFM. La carpeta `pipeline/` no fue modificada, porque corresponde al trabajo de los otros integrantes.
-
+Esta revisión toma como punto de partida la migración de Sakila realizada en el TP1. Se revisaron y reforzaron las Actividades 0 a 3 del análisis RFM. 
 ## 1. Portabilidad del esquema (Actividad 0)
 
 Los nombres físicos introducidos durante la migración a SQL Server quedan centralizados en `esquema.py`:
