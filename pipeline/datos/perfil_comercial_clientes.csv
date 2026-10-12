@@ -1,4 +1,4 @@
-﻿id_cliente,perfil_comercial,canal_preferido,descuento_sugerido_pct
+﻿customer_id,perfil_comercial,canal_preferido,descuento_sugerido_pct
 1,Alto valor,Email,7.5
 2,Ocasional,SMS,10
 3,Frecuente,SMS,5
