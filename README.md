@@ -9,8 +9,8 @@
 - [x] **Actividad 1:** métricas RFM, quintiles y contraste SQL/pandas.
 - [x] **Actividad 2:** perfilado, atípicos y controles de calidad.
 - [x] **Actividad 3:** visualizaciones narrativas exportadas.
-- [ ] **Actividad 4:** pipeline ETL idempotente, a cargo del integrante responsable.
-- [ ] **Actividad 5:** informe final y anexo de IA.
+- [x] **Actividad 4:** pipeline ETL de reemplazo de snapshot, con evidencia de dos ejecuciones.
+- [x] **Actividad 5:** informe final, diagnóstico de calidad y anexo de IA.
 
 ## Preparación del entorno
 
@@ -51,6 +51,27 @@ All** y guardar el notebook con las salidas visibles. Se obtiene:
 - perfilado, atípicos y controles de calidad reproducibles;
 - tres gráficos PNG a 150 dpi dentro de `graficos/`.
 
+## Ejecución del pipeline
+
+Con `venv_tp2` activo, ejecutar desde la raíz del repositorio:
+
+```powershell
+python .\pipeline\pipeline.py
+```
+
+El proceso consulta SQL Server, combina los 599 clientes con el archivo de
+prueba `pipeline/datos/perfil_comercial_clientes.csv` y calcula sus puntajes
+RFM. Conserva los clientes sin perfil externo mediante una unión izquierda.
+La carga crea `dbo.TP2_SegmentacionRFM` si falta y reemplaza sus filas dentro
+de una transacción. Se necesitan permisos de creación y escritura sobre el
+destino. No modifica las tablas de origen.
+
+Ejecutar dos veces y comprobar que el destino conserva 599 clientes sin
+duplicados. `fecha_proceso` registra la ejecución y puede variar; para
+comparar el contenido de negocio se excluye esa columna de auditoría.
+El log generado queda en `pipeline/pipeline.log` y no se versiona. La evidencia
+histórica de dos ejecuciones está en `pipeline/Evidencia.log`.
+
 ## Estructura
 
 ```text
@@ -60,7 +81,7 @@ sql/                 reconciliación y conjunto de trabajo RFM
 notebooks/           actividades 0 a 3
 graficos/            visualizaciones exportadas
 pipeline/            actividad 4, mantenida por el equipo responsable
-informe/             informe final, anexo de IA y reporte de revisión
+informe/             informe final, diagnóstico de calidad y anexo de IA
 ```
 
 ## Nota de reconciliación

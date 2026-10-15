@@ -11,3 +11,6 @@ __pycache__/
 # Archivos de configuracion con credenciales sensibles
 *.env
 .vscode/
+
+# Logs generados por el pipeline ETL
+pipeline/pipeline.log
