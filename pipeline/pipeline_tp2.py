@@ -42,7 +42,8 @@ logger = logging.getLogger("pipeline_rfm")
 
 # La plantilla usa nombres canónicos de Sakila. renderizar_sql() sustituye
 # {{customer}}, {{rental.customer_id}}, etc. según el diccionario de esquema.py.
-CONSULTA_RFM_CANONICA = """
+
+CONSULTA_RFM_CANONICA = """\
 WITH fecha_maxima AS (
     SELECT MAX({{rental.rental_date}}) AS max_rental_date
     FROM {{rental}}
@@ -57,10 +58,12 @@ rental_por_cliente AS (
 ),
 payment_por_cliente AS (
     SELECT
-        {{payment.customer_id}} AS customer_id,
-        SUM(CAST({{payment.amount}} AS DECIMAL(12, 2))) AS monetary_amount
-    FROM {{payment}}
-    GROUP BY {{payment.customer_id}}
+        r.{{rental.customer_id}} AS customer_id,
+        SUM(CAST(p.{{payment.amount}} AS DECIMAL(12, 2))) AS monetary_amount
+    FROM {{rental}} AS r
+    INNER JOIN {{payment}} AS p
+        ON r.{{rental.rental_id}} = p.{{payment.rental_id}}
+    GROUP BY r.{{rental.customer_id}}
 )
 SELECT
     c.{{customer.customer_id}} AS customer_id,
