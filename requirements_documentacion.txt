@@ -1,0 +1,2 @@
+# Opcional: regenerar los PDF en venv_tp2, después de ejecutar las pruebas.
+reportlab==5.0.1

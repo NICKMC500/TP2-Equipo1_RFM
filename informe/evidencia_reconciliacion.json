@@ -1,0 +1,168 @@
+{
+  "archivo": "sakila_carga_sql_server.sql",
+  "procedencia": "script de carga traducido a SQL Server utilizado por el equipo en TP1",
+  "sha256": "bed2046d87835b7bc3b9555467bf2d5294765187fe2ee8b54ffb225975d5835d",
+  "ddl_sha256": "67f0d88401d6331128d6beacf713b7ee92f73427e20b036e11b28b8f771e3f62",
+  "mapeo_historico_sha256": "818dc8c6933b49ca273bb6e75632da4c555acbe0b66e3348f297168036b8a9f4",
+  "conteos": {
+    "actor": 200,
+    "address": 603,
+    "category": 16,
+    "city": 600,
+    "country": 109,
+    "customer": 599,
+    "film": 1000,
+    "film_actor": 5462,
+    "film_category": 1000,
+    "film_text": 1000,
+    "inventory": 4581,
+    "language": 6,
+    "payment": 16044,
+    "rental": 16044,
+    "staff": 2,
+    "store": 2
+  },
+  "metodos": {
+    "actor": "tuplas INSERT contadas en archivo",
+    "address": "tuplas INSERT contadas en archivo",
+    "category": "tuplas INSERT contadas en archivo",
+    "city": "tuplas INSERT contadas en archivo",
+    "country": "tuplas INSERT contadas en archivo",
+    "customer": "tuplas INSERT contadas en archivo",
+    "film": "tuplas INSERT contadas en archivo",
+    "film_actor": "tuplas INSERT contadas en archivo",
+    "film_category": "tuplas INSERT contadas en archivo",
+    "film_text": "derivado del INSERT de film por trigger AFTER INSERT acreditado en DDL",
+    "inventory": "tuplas INSERT contadas en archivo",
+    "language": "tuplas INSERT contadas en archivo",
+    "payment": "tuplas INSERT contadas en archivo",
+    "rental": "tuplas INSERT contadas en archivo",
+    "staff": "tuplas INSERT contadas en archivo",
+    "store": "tuplas INSERT contadas en archivo"
+  },
+  "pagos": {
+    "filas": 16044,
+    "max_id": 16049,
+    "huecos_id": [
+      424,
+      7011,
+      10840,
+      14675,
+      15458
+    ]
+  },
+  "comparacion_sql_server": [
+    {
+      "canonical_table": "actor",
+      "local_table_name": "actor",
+      "source_rows": 200,
+      "sql_server_rows": 200,
+      "difference": 0
+    },
+    {
+      "canonical_table": "address",
+      "local_table_name": "direccion",
+      "source_rows": 603,
+      "sql_server_rows": 603,
+      "difference": 0
+    },
+    {
+      "canonical_table": "category",
+      "local_table_name": "categoria",
+      "source_rows": 16,
+      "sql_server_rows": 16,
+      "difference": 0
+    },
+    {
+      "canonical_table": "city",
+      "local_table_name": "ciudad",
+      "source_rows": 600,
+      "sql_server_rows": 600,
+      "difference": 0
+    },
+    {
+      "canonical_table": "country",
+      "local_table_name": "pais",
+      "source_rows": 109,
+      "sql_server_rows": 109,
+      "difference": 0
+    },
+    {
+      "canonical_table": "customer",
+      "local_table_name": "cliente",
+      "source_rows": 599,
+      "sql_server_rows": 599,
+      "difference": 0
+    },
+    {
+      "canonical_table": "film",
+      "local_table_name": "pelicula",
+      "source_rows": 1000,
+      "sql_server_rows": 1000,
+      "difference": 0
+    },
+    {
+      "canonical_table": "film_actor",
+      "local_table_name": "pelicula_actor",
+      "source_rows": 5462,
+      "sql_server_rows": 5462,
+      "difference": 0
+    },
+    {
+      "canonical_table": "film_category",
+      "local_table_name": "pelicula_categoria",
+      "source_rows": 1000,
+      "sql_server_rows": 1000,
+      "difference": 0
+    },
+    {
+      "canonical_table": "film_text",
+      "local_table_name": "pelicula_texto",
+      "source_rows": 1000,
+      "sql_server_rows": 1000,
+      "difference": 0
+    },
+    {
+      "canonical_table": "inventory",
+      "local_table_name": "inventario",
+      "source_rows": 4581,
+      "sql_server_rows": 4581,
+      "difference": 0
+    },
+    {
+      "canonical_table": "language",
+      "local_table_name": "idioma",
+      "source_rows": 6,
+      "sql_server_rows": 6,
+      "difference": 0
+    },
+    {
+      "canonical_table": "payment",
+      "local_table_name": "pago",
+      "source_rows": 16044,
+      "sql_server_rows": 16044,
+      "difference": 0
+    },
+    {
+      "canonical_table": "rental",
+      "local_table_name": "alquiler",
+      "source_rows": 16044,
+      "sql_server_rows": 16044,
+      "difference": 0
+    },
+    {
+      "canonical_table": "staff",
+      "local_table_name": "personal",
+      "source_rows": 2,
+      "sql_server_rows": 2,
+      "difference": 0
+    },
+    {
+      "canonical_table": "store",
+      "local_table_name": "tienda",
+      "source_rows": 2,
+      "sql_server_rows": 2,
+      "difference": 0
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "clientes": 599,
+  "nulos": 0,
+  "duplicados": 0,
+  "promedio_monto": 112.53181969949917,
+  "mediana_recencia": 175.0,
+  "recencia_cero": 158,
+  "atipicos": 6,
+  "q1": 94.785,
+  "q3": 128.70499999999998,
+  "limite_inferior": 43.905000000000015,
+  "limite_superior": 179.58499999999998,
+  "reglas": {
+    "return_before_rental": 0,
+    "payment_before_rental": 0,
+    "negative_payments": 0
+  },
+  "controles": {
+    "duplicate_customers": 0.0,
+    "payments_without_rental": 0.0,
+    "amount_payments_without_rental": 0.0,
+    "customers_without_payment": 0.0,
+    "negative_payments": 0.0
+  },
+  "ticket_por_quintil": {
+    "1": 4.210162673250656,
+    "2": 4.149183574879227,
+    "3": 4.202860665633775,
+    "4": 4.220295522361707,
+    "5": 4.210698830075024
+  },
+  "variacion_ticket_pct": 1.713878072616981,
+  "p05": 73.79899999999999,
+  "p95": 155.596,
+  "clientes_tramo_central": 539,
+  "sql_segundos": 0.0691715000430122,
+  "pandas_segundos": 0.3193815000122413,
+  "quintiles": [
+    {
+      "métrica": "R",
+      "coincidencia qcut vs NTILE (%)": 99.6661101836394,
+      "coincidencia pandas equivalente vs NTILE (%)": 100.0,
+      "casos frontera qcut": 2
+    },
+    {
+      "métrica": "F",
+      "coincidencia qcut vs NTILE (%)": 99.6661101836394,
+      "coincidencia pandas equivalente vs NTILE (%)": 100.0,
+      "casos frontera qcut": 2
+    },
+    {
+      "métrica": "M",
+      "coincidencia qcut vs NTILE (%)": 99.6661101836394,
+      "coincidencia pandas equivalente vs NTILE (%)": 100.0,
+      "casos frontera qcut": 2
+    }
+  ]
+}

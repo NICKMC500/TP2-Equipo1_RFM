@@ -1,0 +1,42 @@
+{
+  "fecha": "2026-10-30T19:39:17",
+  "script": "pipeline/pipeline_tp2.py",
+  "sha256_script": "7aa4a38955db4e100a6071cf68dce15786d18987178db217de5471e8b78ca04b",
+  "consulta_control": "/* Ejecutar sobre el destino después de cada corrida del pipeline.\n   fecha_proceso es auditoría y se excluye de los controles de negocio.\n   Las sumas no prueban por sí solas igualdad total: verificar_idempotencia.py\n   además compara todas las columnas de negocio y calcula una huella SHA-256. */\nSELECT COUNT_BIG(*) AS filas,\n       COUNT_BIG(DISTINCT id_cliente) AS clientes_distintos,\n       COALESCE(SUM(CAST(id_cliente AS BIGINT)), 0) AS suma_id_cliente,\n       COALESCE(SUM(CAST(frecuencia AS BIGINT)), 0) AS suma_frecuencia,\n       COALESCE(SUM(CAST(monto_total AS DECIMAL(20,2))), 0) AS suma_monto,\n       COALESCE(SUM(CAST(score_recencia AS BIGINT)), 0) AS suma_score_recencia,\n       COALESCE(SUM(CAST(score_frecuencia AS BIGINT)), 0) AS suma_score_frecuencia,\n       COALESCE(SUM(CAST(score_monto AS BIGINT)), 0) AS suma_score_monto\nFROM dbo.TP2_SegmentacionRFM;\n",
+  "excluida_de_comparacion": [
+    "fecha_proceso"
+  ],
+  "ejecuciones": [
+    {
+      "ejecucion": 1,
+      "control_sql": {
+        "filas": 599.0,
+        "clientes_distintos": 599.0,
+        "suma_id_cliente": 179700.0,
+        "suma_frecuencia": 16044.0,
+        "suma_monto": 67406.56,
+        "suma_score_recencia": 1797.0,
+        "suma_score_frecuencia": 1797.0,
+        "suma_score_monto": 1797.0
+      },
+      "sha256_negocio": "eb7688b20036f4acae4a0c86beb97afad7306cbcd979f586b7b25d362f4a956f",
+      "fecha_proceso": "2026-10-30 19:39:19"
+    },
+    {
+      "ejecucion": 2,
+      "control_sql": {
+        "filas": 599.0,
+        "clientes_distintos": 599.0,
+        "suma_id_cliente": 179700.0,
+        "suma_frecuencia": 16044.0,
+        "suma_monto": 67406.56,
+        "suma_score_recencia": 1797.0,
+        "suma_score_frecuencia": 1797.0,
+        "suma_score_monto": 1797.0
+      },
+      "sha256_negocio": "eb7688b20036f4acae4a0c86beb97afad7306cbcd979f586b7b25d362f4a956f",
+      "fecha_proceso": "2026-10-30 19:39:23"
+    }
+  ],
+  "resultado": "Dos ejecuciones: conteos, sumas y todas las columnas de negocio idénticas."
+}

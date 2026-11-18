@@ -1,0 +1,21 @@
+{
+  "nota": "Correspondencia histórica del archivo archivado de TP1. No es el mapeo de la base destino y no cambia durante la adaptación a otro equipo.",
+  "tablas": {
+    "actor": "actor",
+    "address": "direccion",
+    "category": "categoria",
+    "city": "ciudad",
+    "country": "pais",
+    "customer": "cliente",
+    "film": "pelicula",
+    "film_actor": "pelicula_actor",
+    "film_category": "pelicula_categoria",
+    "film_text": "pelicula_texto",
+    "inventory": "inventario",
+    "language": "idioma",
+    "payment": "pago",
+    "rental": "alquiler",
+    "staff": "personal",
+    "store": "tienda"
+  }
+}

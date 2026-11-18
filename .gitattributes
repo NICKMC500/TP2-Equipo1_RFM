@@ -1,0 +1,8 @@
+# Evitar que la conversión LF/CRLF altere los PDF y sus offsets internos.
+*.pdf binary
+*.png binary
+
+# Conservar byte a byte los archivos que se identifican por SHA-256.
+sql/origen/*.sql -text
+sql/origen/mapeo_carga.json -text
+pipeline/pipeline_tp2.py -text

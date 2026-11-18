@@ -220,4 +220,7 @@ def renderizar_sql(plantilla: str) -> str:
             return tabla_sql(partes[0])
         return columna_sql(partes[0], partes[1])
 
-    return _TOKEN_SQL.sub(reemplazar, plantilla)
+    sql = _TOKEN_SQL.sub(reemplazar, plantilla)
+    if "{{" in sql or "}}" in sql:
+        raise ValueError("La plantilla SQL contiene un token inválido o sin resolver.")
+    return sql

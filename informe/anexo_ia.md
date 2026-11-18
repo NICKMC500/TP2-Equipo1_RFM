@@ -139,7 +139,9 @@ Las principales acciones realizadas fueron:
 - **`NameError: name 'df_rfm' is not defined`:** el error apareció después de reiniciar el kernel y se resolvió ejecutando las celdas del notebook desde el principio y en orden.
 - **Diferencias en la recencia:** se normalizaron las fechas antes de calcular las diferencias entre ellas para hacer comparables los resultados de SQL Server y pandas.
 
-No tenemos registradas otras correcciones manuales sobre el código generado.
+Esta sección describe la entrega original. Las correcciones posteriores a la
+devolución se registran en la sección 6, sin atribuir al equipo intervenciones
+manuales que no se hayan confirmado.
 
 ---
 
@@ -234,11 +236,21 @@ Durante la revisión del informe y del notebook identificamos afirmaciones que r
 
 ### 5.1. Diferencia en la cantidad de pagos
 
-En el primer borrador de la sección 2.2 del informe, la herramienta afirmó que se había verificado que la diferencia de cinco pagos entre el volcado original (16.049) y SQL Server (16.044) no afectaba al análisis RFM.
+La entrega original arrastraba un conteo de origen incorrecto: 16.049 se
+interpretó como cantidad de pagos. La IA propuso explicaciones sobre cinco
+pagos sin alquiler que no tenían evidencia suficiente. Aunque se reformuló
+esa explicación como hipótesis, no se había contado el archivo real.
 
-Esa afirmación no estaba respaldada por una comprobación suficiente: los cinco registros no estaban presentes en SQL Server. La diferencia era consistente con la posibilidad de que correspondieran a pagos sin alquiler asociado que no se hubieran migrado, pero eso no demostraba por sí solo que esa fuera la causa ni que la diferencia no afectara al análisis.
+La devolución del profesor señaló que 16.049 era el identificador máximo,
+no la cantidad de filas. El 30/10 se contaron las tuplas del archivo de carga
+de TP1 indicado por el equipo: son 16.044 pagos y hay cinco huecos de ID.
+La diferencia con SQL Server es cero. Se retiró la hipótesis de pérdida de
+pagos y se guardaron la procedencia y las huellas del archivo y su DDL.
 
-Detectamos el problema al contrastar el borrador con la conclusión del notebook, donde se utilizaba una formulación más prudente. Por eso, el informe se corrigió para distinguir entre una explicación posible y un hecho verificado.
+El archivo disponible es la traducción a SQL Server utilizada por el equipo;
+no se lo confunde con un volcado MySQL independiente. La lección es verificar
+el dato de partida: convertir una afirmación en hipótesis no corrige un
+conteo base equivocado.
 
 ### 5.2. Interpretación de los segmentos RFM
 
@@ -249,3 +261,27 @@ Además, el número aproximado de 120 clientes se explicaba por la distribución
 Por ello, el tamaño del quintil no debe presentarse como prueba de que esos clientes se están enfriando. Para sostener esa conclusión, es necesario analizar los valores de recencia de los integrantes del grupo, comprobar la orientación de las puntuaciones y relacionarlos con los demás indicadores RFM.
 
 Esta revisión permitió distinguir entre una descripción del resultado de la segmentación y una conclusión comercial respaldada por los datos.
+
+## 6. Correcciones posteriores a la devolución (30/10/2026)
+
+Prompt de continuación: «el profe dijo que tenemos que corregir con los
+cambios adecuados e ir preparándonos para realizar el oral».
+
+Con apoyo de IA se prepararon estas correcciones, sujetas a revisión y
+comprensión de los integrantes antes de la defensa:
+
+- Conteo reproducible del archivo de carga indicado en la carpeta TP, con
+  evidencia de procedencia; se eliminó el supuesto de cinco pagos faltantes.
+- Reglas temporales del dominio calculadas en SQL Server y pandas.
+- Unificación del monto por pagos asociados a alquileres y nombre del script
+  `pipeline_tp2.py`, conforme a la estructura solicitada.
+- Dos ejecuciones CLI del archivo final, con conteos, sumas, comparación de
+  todas las columnas de negocio y huellas SHA-256. `fecha_proceso` se excluye
+  expresamente por ser metadato de auditoría variable.
+- Nuevo hallazgo sobre monto por alquiler y un piloto de fidelización con
+  población y métrica de evaluación explícitas; no se atribuye causalidad.
+- Actualización del informe, diagnóstico, guía oral y textos para la wiki.
+
+La IA ayuda a implementar y verificar, pero no puede sustituir la explicación
+del equipo. Cada integrante debe ejecutar el proceso y explicar los cambios
+de nombres, empates, reglas, joins y transacciones con sus propias palabras.
