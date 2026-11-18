@@ -1,8 +1,8 @@
 Evidencia de la versión final del pipeline
 {
-  "fecha": "2026-10-30T19:39:17",
+  "fecha": "2026-11-17T22:05:56",
   "script": "pipeline/pipeline_tp2.py",
-  "sha256_script": "7aa4a38955db4e100a6071cf68dce15786d18987178db217de5471e8b78ca04b",
+  "sha256_script": "d1b6ca14d90a158a150ae326ebe3ff8f86e0fd071895955ef7cdb66d779b6b3c",
   "consulta_control": "/* Ejecutar sobre el destino después de cada corrida del pipeline.\n   fecha_proceso es auditoría y se excluye de los controles de negocio.\n   Las sumas no prueban por sí solas igualdad total: verificar_idempotencia.py\n   además compara todas las columnas de negocio y calcula una huella SHA-256. */\nSELECT COUNT_BIG(*) AS filas,\n       COUNT_BIG(DISTINCT id_cliente) AS clientes_distintos,\n       COALESCE(SUM(CAST(id_cliente AS BIGINT)), 0) AS suma_id_cliente,\n       COALESCE(SUM(CAST(frecuencia AS BIGINT)), 0) AS suma_frecuencia,\n       COALESCE(SUM(CAST(monto_total AS DECIMAL(20,2))), 0) AS suma_monto,\n       COALESCE(SUM(CAST(score_recencia AS BIGINT)), 0) AS suma_score_recencia,\n       COALESCE(SUM(CAST(score_frecuencia AS BIGINT)), 0) AS suma_score_frecuencia,\n       COALESCE(SUM(CAST(score_monto AS BIGINT)), 0) AS suma_score_monto\nFROM dbo.TP2_SegmentacionRFM;\n",
   "excluida_de_comparacion": [
     "fecha_proceso"
@@ -10,60 +10,60 @@ Evidencia de la versión final del pipeline
 }
 
 EJECUCIÓN 1: python pipeline/pipeline_tp2.py
-2026-10-30 19:39:19,038 | INFO | ========================================================================
-2026-10-30 19:39:19,038 | INFO | INICIO DEL PIPELINE ETL: 2026-10-30 19:39:19
-2026-10-30 19:39:19,039 | INFO | ETAPA 1/4 - EXTRACCIÓN: inicio.
-2026-10-30 19:39:19,039 | INFO | Consulta RFM preparada usando el diccionario esquema.py.
-2026-10-30 19:39:19,524 | INFO | Consultando customer, rental y payment en SQL Server...
-2026-10-30 19:39:19,640 | INFO | Extracción desde SQL Server completada: 599 filas.
-2026-10-30 19:39:19,641 | INFO | Leyendo datos complementarios desde perfil_comercial_clientes.csv...
-2026-10-30 19:39:19,650 | INFO | CSV leído correctamente: 30 filas.
-2026-10-30 19:39:19,655 | INFO | Validación de claves completada: SQL=599 clientes, CSV=30 registros.
-2026-10-30 19:39:19,655 | INFO | ETAPA 2/4 - TRANSFORMACIÓN: inicio.
-2026-10-30 19:39:19,655 | INFO | Datos DB: 599 filas; CSV: 30 filas.
-2026-10-30 19:39:19,659 | INFO | Combinando DB + CSV mediante pandas.merge() por customer_id...
-2026-10-30 19:39:19,671 | INFO | Merge: 30 coincidencias y 569 clientes sin perfil en el CSV.
-2026-10-30 19:39:19,674 | INFO | Calculando scores R, F y M mediante quintiles en pandas...
-2026-10-30 19:39:19,691 | INFO | Transformación finalizada: 599 filas y 94 segmentos distintos.
-2026-10-30 19:39:19,692 | INFO | ETAPA 3/4 - CARGA: inicio; filas a cargar: 599.
-2026-10-30 19:39:19,693 | INFO | Verificando/creando la tabla destino si no existe...
-2026-10-30 19:39:19,704 | INFO | Eliminando el snapshot anterior dentro de la transacción...
-2026-10-30 19:39:19,714 | INFO | Insertando el nuevo snapshot...
-2026-10-30 19:39:20,212 | INFO | Inserción completada; se confirmará la transacción.
-2026-10-30 19:39:20,214 | INFO | COMMIT realizado correctamente.
-2026-10-30 19:39:20,214 | INFO | ETAPA 4/4 - VERIFICACIÓN: contando filas en la tabla destino...
-2026-10-30 19:39:20,219 | INFO | Destino: 599 filas; esperado: 599 filas.
-2026-10-30 19:39:20,219 | INFO | PIPELINE FINALIZADO CORRECTAMENTE. Duración: 0:00:01.181279.
-2026-10-30 19:39:20,219 | INFO | Fin del proceso ETL.
+2026-11-17 22:05:58,449 | INFO | ========================================================================
+2026-11-17 22:05:58,450 | INFO | INICIO DEL PIPELINE ETL: 2026-11-17 22:05:58
+2026-11-17 22:05:58,450 | INFO | ETAPA 1/4 - EXTRACCIÓN: inicio.
+2026-11-17 22:05:58,451 | INFO | Consulta RFM preparada usando el diccionario esquema.py.
+2026-11-17 22:05:59,481 | INFO | Consultando customer, rental y payment en SQL Server...
+2026-11-17 22:05:59,832 | INFO | Extracción desde SQL Server completada: 599 filas.
+2026-11-17 22:05:59,833 | INFO | Leyendo datos complementarios desde perfil_comercial_clientes.csv...
+2026-11-17 22:05:59,846 | INFO | CSV leído correctamente: 30 filas.
+2026-11-17 22:05:59,861 | INFO | Validación de claves completada: SQL=599 clientes, CSV=30 registros.
+2026-11-17 22:05:59,861 | INFO | ETAPA 2/4 - TRANSFORMACIÓN: inicio.
+2026-11-17 22:05:59,862 | INFO | Datos DB: 599 filas; CSV: 30 filas.
+2026-11-17 22:05:59,868 | INFO | Combinando DB + CSV mediante pandas.merge() por customer_id...
+2026-11-17 22:05:59,891 | INFO | Merge: 30 coincidencias y 569 clientes sin perfil en el CSV.
+2026-11-17 22:05:59,898 | INFO | Calculando scores R, F y M mediante quintiles en pandas...
+2026-11-17 22:05:59,926 | INFO | Transformación finalizada: 599 filas y 94 segmentos distintos.
+2026-11-17 22:05:59,926 | INFO | ETAPA 3/4 - CARGA: inicio; filas a cargar: 599.
+2026-11-17 22:05:59,928 | INFO | Verificando/creando la tabla destino si no existe...
+2026-11-17 22:05:59,946 | INFO | Eliminando el snapshot anterior dentro de la transacción...
+2026-11-17 22:05:59,961 | INFO | Insertando el nuevo snapshot...
+2026-11-17 22:06:00,623 | INFO | Inserción completada; se confirmará la transacción.
+2026-11-17 22:06:00,625 | INFO | COMMIT realizado correctamente.
+2026-11-17 22:06:00,626 | INFO | ETAPA 4/4 - VERIFICACIÓN: contando filas en la tabla destino...
+2026-11-17 22:06:00,630 | INFO | Destino: 599 filas; esperado: 599 filas.
+2026-11-17 22:06:00,630 | INFO | PIPELINE FINALIZADO CORRECTAMENTE. Duración: 0:00:02.180743.
+2026-11-17 22:06:00,630 | INFO | Fin del proceso ETL.
 CONTROL SQL: {"filas": 599.0, "clientes_distintos": 599.0, "suma_id_cliente": 179700.0, "suma_frecuencia": 16044.0, "suma_monto": 67406.56, "suma_score_recencia": 1797.0, "suma_score_frecuencia": 1797.0, "suma_score_monto": 1797.0}
 SHA256 de negocio: eb7688b20036f4acae4a0c86beb97afad7306cbcd979f586b7b25d362f4a956f
 
 EJECUCIÓN 2: python pipeline/pipeline_tp2.py
-2026-10-30 19:39:22,895 | INFO | ========================================================================
-2026-10-30 19:39:22,895 | INFO | INICIO DEL PIPELINE ETL: 2026-10-30 19:39:22
-2026-10-30 19:39:22,896 | INFO | ETAPA 1/4 - EXTRACCIÓN: inicio.
-2026-10-30 19:39:22,896 | INFO | Consulta RFM preparada usando el diccionario esquema.py.
-2026-10-30 19:39:22,993 | INFO | Consultando customer, rental y payment en SQL Server...
-2026-10-30 19:39:23,106 | INFO | Extracción desde SQL Server completada: 599 filas.
-2026-10-30 19:39:23,107 | INFO | Leyendo datos complementarios desde perfil_comercial_clientes.csv...
-2026-10-30 19:39:23,112 | INFO | CSV leído correctamente: 30 filas.
-2026-10-30 19:39:23,116 | INFO | Validación de claves completada: SQL=599 clientes, CSV=30 registros.
-2026-10-30 19:39:23,117 | INFO | ETAPA 2/4 - TRANSFORMACIÓN: inicio.
-2026-10-30 19:39:23,117 | INFO | Datos DB: 599 filas; CSV: 30 filas.
-2026-10-30 19:39:23,120 | INFO | Combinando DB + CSV mediante pandas.merge() por customer_id...
-2026-10-30 19:39:23,133 | INFO | Merge: 30 coincidencias y 569 clientes sin perfil en el CSV.
-2026-10-30 19:39:23,137 | INFO | Calculando scores R, F y M mediante quintiles en pandas...
-2026-10-30 19:39:23,156 | INFO | Transformación finalizada: 599 filas y 94 segmentos distintos.
-2026-10-30 19:39:23,157 | INFO | ETAPA 3/4 - CARGA: inicio; filas a cargar: 599.
-2026-10-30 19:39:23,158 | INFO | Verificando/creando la tabla destino si no existe...
-2026-10-30 19:39:23,160 | INFO | Eliminando el snapshot anterior dentro de la transacción...
-2026-10-30 19:39:23,164 | INFO | Insertando el nuevo snapshot...
-2026-10-30 19:39:23,597 | INFO | Inserción completada; se confirmará la transacción.
-2026-10-30 19:39:23,599 | INFO | COMMIT realizado correctamente.
-2026-10-30 19:39:23,599 | INFO | ETAPA 4/4 - VERIFICACIÓN: contando filas en la tabla destino...
-2026-10-30 19:39:23,602 | INFO | Destino: 599 filas; esperado: 599 filas.
-2026-10-30 19:39:23,603 | INFO | PIPELINE FINALIZADO CORRECTAMENTE. Duración: 0:00:00.707920.
-2026-10-30 19:39:23,603 | INFO | Fin del proceso ETL.
+2026-11-17 22:06:03,047 | INFO | ========================================================================
+2026-11-17 22:06:03,047 | INFO | INICIO DEL PIPELINE ETL: 2026-11-17 22:06:03
+2026-11-17 22:06:03,048 | INFO | ETAPA 1/4 - EXTRACCIÓN: inicio.
+2026-11-17 22:06:03,048 | INFO | Consulta RFM preparada usando el diccionario esquema.py.
+2026-11-17 22:06:03,290 | INFO | Consultando customer, rental y payment en SQL Server...
+2026-11-17 22:06:03,393 | INFO | Extracción desde SQL Server completada: 599 filas.
+2026-11-17 22:06:03,393 | INFO | Leyendo datos complementarios desde perfil_comercial_clientes.csv...
+2026-11-17 22:06:03,396 | INFO | CSV leído correctamente: 30 filas.
+2026-11-17 22:06:03,400 | INFO | Validación de claves completada: SQL=599 clientes, CSV=30 registros.
+2026-11-17 22:06:03,400 | INFO | ETAPA 2/4 - TRANSFORMACIÓN: inicio.
+2026-11-17 22:06:03,400 | INFO | Datos DB: 599 filas; CSV: 30 filas.
+2026-11-17 22:06:03,403 | INFO | Combinando DB + CSV mediante pandas.merge() por customer_id...
+2026-11-17 22:06:03,416 | INFO | Merge: 30 coincidencias y 569 clientes sin perfil en el CSV.
+2026-11-17 22:06:03,420 | INFO | Calculando scores R, F y M mediante quintiles en pandas...
+2026-11-17 22:06:03,439 | INFO | Transformación finalizada: 599 filas y 94 segmentos distintos.
+2026-11-17 22:06:03,440 | INFO | ETAPA 3/4 - CARGA: inicio; filas a cargar: 599.
+2026-11-17 22:06:03,442 | INFO | Verificando/creando la tabla destino si no existe...
+2026-11-17 22:06:03,444 | INFO | Eliminando el snapshot anterior dentro de la transacción...
+2026-11-17 22:06:03,449 | INFO | Insertando el nuevo snapshot...
+2026-11-17 22:06:04,225 | INFO | Inserción completada; se confirmará la transacción.
+2026-11-17 22:06:04,232 | INFO | COMMIT realizado correctamente.
+2026-11-17 22:06:04,233 | INFO | ETAPA 4/4 - VERIFICACIÓN: contando filas en la tabla destino...
+2026-11-17 22:06:04,241 | INFO | Destino: 599 filas; esperado: 599 filas.
+2026-11-17 22:06:04,242 | INFO | PIPELINE FINALIZADO CORRECTAMENTE. Duración: 0:00:01.194435.
+2026-11-17 22:06:04,242 | INFO | Fin del proceso ETL.
 CONTROL SQL: {"filas": 599.0, "clientes_distintos": 599.0, "suma_id_cliente": 179700.0, "suma_frecuencia": 16044.0, "suma_monto": 67406.56, "suma_score_recencia": 1797.0, "suma_score_frecuencia": 1797.0, "suma_score_monto": 1797.0}
 SHA256 de negocio: eb7688b20036f4acae4a0c86beb97afad7306cbcd979f586b7b25d362f4a956f
 

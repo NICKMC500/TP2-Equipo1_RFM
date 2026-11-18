@@ -33,8 +33,8 @@
   "p05": 73.79899999999999,
   "p95": 155.596,
   "clientes_tramo_central": 539,
-  "sql_segundos": 0.0691715000430122,
-  "pandas_segundos": 0.3193815000122413,
+  "sql_segundos": 0.08452430000033928,
+  "pandas_segundos": 0.41088269999818294,
   "quintiles": [
     {
       "métrica": "R",

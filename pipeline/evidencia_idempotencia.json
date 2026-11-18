@@ -1,7 +1,7 @@
 {
-  "fecha": "2026-10-30T19:39:17",
+  "fecha": "2026-11-17T22:05:56",
   "script": "pipeline/pipeline_tp2.py",
-  "sha256_script": "7aa4a38955db4e100a6071cf68dce15786d18987178db217de5471e8b78ca04b",
+  "sha256_script": "d1b6ca14d90a158a150ae326ebe3ff8f86e0fd071895955ef7cdb66d779b6b3c",
   "consulta_control": "/* Ejecutar sobre el destino después de cada corrida del pipeline.\n   fecha_proceso es auditoría y se excluye de los controles de negocio.\n   Las sumas no prueban por sí solas igualdad total: verificar_idempotencia.py\n   además compara todas las columnas de negocio y calcula una huella SHA-256. */\nSELECT COUNT_BIG(*) AS filas,\n       COUNT_BIG(DISTINCT id_cliente) AS clientes_distintos,\n       COALESCE(SUM(CAST(id_cliente AS BIGINT)), 0) AS suma_id_cliente,\n       COALESCE(SUM(CAST(frecuencia AS BIGINT)), 0) AS suma_frecuencia,\n       COALESCE(SUM(CAST(monto_total AS DECIMAL(20,2))), 0) AS suma_monto,\n       COALESCE(SUM(CAST(score_recencia AS BIGINT)), 0) AS suma_score_recencia,\n       COALESCE(SUM(CAST(score_frecuencia AS BIGINT)), 0) AS suma_score_frecuencia,\n       COALESCE(SUM(CAST(score_monto AS BIGINT)), 0) AS suma_score_monto\nFROM dbo.TP2_SegmentacionRFM;\n",
   "excluida_de_comparacion": [
     "fecha_proceso"
@@ -20,7 +20,7 @@
         "suma_score_monto": 1797.0
       },
       "sha256_negocio": "eb7688b20036f4acae4a0c86beb97afad7306cbcd979f586b7b25d362f4a956f",
-      "fecha_proceso": "2026-10-30 19:39:19"
+      "fecha_proceso": "2026-11-17 22:05:59"
     },
     {
       "ejecucion": 2,
@@ -35,7 +35,7 @@
         "suma_score_monto": 1797.0
       },
       "sha256_negocio": "eb7688b20036f4acae4a0c86beb97afad7306cbcd979f586b7b25d362f4a956f",
-      "fecha_proceso": "2026-10-30 19:39:23"
+      "fecha_proceso": "2026-11-17 22:06:03"
     }
   ],
   "resultado": "Dos ejecuciones: conteos, sumas y todas las columnas de negocio idénticas."

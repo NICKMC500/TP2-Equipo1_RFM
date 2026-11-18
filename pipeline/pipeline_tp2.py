@@ -58,7 +58,7 @@ rental_por_cliente AS (
 payment_por_cliente AS (
     SELECT
         r.{{rental.customer_id}} AS customer_id,
-        SUM(CAST({{payment.amount}} AS DECIMAL(12, 2))) AS monetary_amount
+        SUM(CAST(p.{{payment.amount}} AS DECIMAL(12, 2))) AS monetary_amount
     FROM {{rental}} AS r
     INNER JOIN {{payment}} AS p
         ON p.{{payment.rental_id}} = r.{{rental.rental_id}}
